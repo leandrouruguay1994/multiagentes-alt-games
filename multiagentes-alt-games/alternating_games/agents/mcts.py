@@ -11,7 +11,7 @@ class MCTSNode:
         self.action = action
         self.children = []
         self.explored_children = 0
-        self.visits = 0
+        self.visits = 1
         self.value = 0
         self.cum_rewards = np.zeros(len(game.agents))
         self.agent = self.game.agent_selection
@@ -104,7 +104,7 @@ class MonteCarloTreeSearch(Agent):
             # accumulate rewards for each agent
             for agent in game.agents:
                 agent_idx = game.agent_name_mapping[agent]
-                rewards[agent_idx] += game.rewards[agent_idx]
+                rewards[agent_idx] += game.rewards[agent]
         rewards /= self.rollouts  # Average rewards over rollouts
         return rewards
 
@@ -116,7 +116,6 @@ class MonteCarloTreeSearch(Agent):
                 # set curr_node to an unvisited child
                 curr_node = curr_node.children[curr_node.explored_children]
                 curr_node.explored_children += 1
-                curr_node.visits += 1
             else:
                 # TODO
                 # set curr_node to a child using the selection function
@@ -138,8 +137,8 @@ class MonteCarloTreeSearch(Agent):
                 child_node = MCTSNode(parent=node, game=child_game, action=action)
                 # Initialize child node
                 node.children.append(child_node)
-                node.explored_children += 1
-                node.visits += 1
+                #node.explored_children += 1
+                #node.visits = 1
 
     def action_selection(self, node: MCTSNode) -> (ActionType, float):
         action: ActionType = None
