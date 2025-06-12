@@ -18,8 +18,8 @@ class MCTSNode:
 
 def ucb(node, C=sqrt(2)) -> float:
     agent_idx = node.game.agent_name_mapping[node.agent]
-    if node.visits==0:
-        return float('inf')
+    #if node.visits==0:
+    #    return float('inf')
     return node.cum_rewards[agent_idx] / node.visits + C * sqrt(log(node.parent.visits)/node.visits)
 
 def uct(node: MCTSNode, agent: AgentID) -> MCTSNode:
