@@ -18,6 +18,8 @@ class MCTSNode:
 
 def ucb(node, C=sqrt(2)) -> float:
     agent_idx = node.game.agent_name_mapping[node.agent]
+    if node.visits==0:
+        return float('inf')
     return node.cum_rewards[agent_idx] / node.visits + C * sqrt(log(node.parent.visits)/node.visits)
 
 def uct(node: MCTSNode, agent: AgentID) -> MCTSNode:
@@ -25,7 +27,7 @@ def uct(node: MCTSNode, agent: AgentID) -> MCTSNode:
     return child
 
 class MonteCarloTreeSearch(Agent):
-    def __init__(self, game: AlternatingGame, agent: AgentID, simulations: int=100, rollouts: int=10, selection: Callable[[MCTSNode, AgentID], MCTSNode]=uct) -> None:
+    def __init__(self, game: AlternatingGame, agent: AgentID, simulations: int=500, rollouts: int=10, selection: Callable[[MCTSNode, AgentID], MCTSNode]=uct) -> None:
         """
         Parameters:
             game: alternating game associated with the agent
@@ -129,6 +131,7 @@ class MonteCarloTreeSearch(Agent):
         #    create a new child node and add it to node children
         if not node.game.terminated():
             actions = node.game.available_actions()
+            np.random.shuffle(actions)
             if actions:
                 action = np.random.choice(actions)
                 child_game = node.game.clone()
@@ -138,7 +141,6 @@ class MonteCarloTreeSearch(Agent):
                 # Initialize child node
                 node.children.append(child_node)
                 #node.explored_children += 1
-                #node.visits = 1
 
     def action_selection(self, node: MCTSNode) -> (ActionType, float):
         action: ActionType = None
