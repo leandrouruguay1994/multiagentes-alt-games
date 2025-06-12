@@ -1,0 +1,64 @@
+# Entornos virtuales
+.env/
+.venv/
+venv/
+env/
+
+# Archivos de configuración de entorno
+*.env
+
+# Archivos de compilación
+__pycache__/
+*.py[cod]
+*.so
+
+# Logs
+*.log
+
+# Archivos de bases de datos temporales
+*.sqlite3
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Salida de notebooks exportados
+*.nbconvert.ipynb
+*.html
+
+# Directorios de VSCode
+.vscode/
+*.code-workspace
+
+# Modelos y datasets (por si subís data o modelos locales)
+data/
+models/
+checkpoints/
+
+# Archivos de experimentación (por si usás W&B o Tensorboard)
+wandb/
+tensorboard/
+tb_logs/
+
+# Otros temporales de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación C/C++ si alguna vez agregás código nativo
+*.o
+*.a
+*.so
+*.dll
+*.exe
+
+# Archivos de debugging de Python
+*.pyo
+*.pyd
+.Python
+
+# Archivos de caché de Anaconda
+*.conda
+*.ipynb_checkpoints
+
+# Archivos de dependencias específicas
+pip-wheel-metadata/
+__pypackages__/
