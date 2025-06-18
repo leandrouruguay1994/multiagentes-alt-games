@@ -40,6 +40,7 @@ class MonteCarloTreeSearch(Agent):
         self.simulations = simulations
         self.rollouts = rollouts
         self.selection = selection
+        self.eval_fn = self.game.eval_fn.get(agent, None)
         
     def action(self) -> ActionType:
         a, _ = self.mcts()
