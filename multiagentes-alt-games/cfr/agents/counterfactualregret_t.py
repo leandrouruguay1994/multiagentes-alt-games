@@ -58,17 +58,13 @@ class CounterFactualRegret(Agent):
         self.node_dict: dict[ObsType, Node] = {}
 
     def action(self):
-        obs = self.env.observe(self.agent)
-
-        if obs in self.node_dict:
-            node = self.node_dict[obs]
-            policy = node.policy()
-            epsilon = 0.1
-            policy = (1 - epsilon) * policy + epsilon / len(policy)
-            a = np.random.choice(len(policy), p=policy)
+        try:
+            node = self.node_dict[self.game.observe(self.agent)]
+            a = np.argmax(np.random.multinomial(1, node.policy(), size=1))
             return a
-        else:
-            print("Node not found! Playing randomly.")
+        except:
+            #raise ValueError('Train agent before calling action()')
+            print('Node does not exist. Playing random.')
             return np.random.choice(self.game.available_actions())
     
     def train(self, niter=1000):
