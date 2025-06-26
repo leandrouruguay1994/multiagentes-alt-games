@@ -3,6 +3,7 @@ from base.agent import Agent
 from math import log, sqrt
 import numpy as np
 from typing import Callable
+from eval import default_eval
 
 class MCTSNode:
     def __init__(self, parent: 'MCTSNode', game: AlternatingGame, action: ActionType):
@@ -27,7 +28,7 @@ def uct(node: MCTSNode, agent: AgentID) -> MCTSNode:
     return child
 
 class MonteCarloTreeSearch(Agent):
-    def __init__(self, game: AlternatingGame, agent: AgentID, simulations: int=500, rollouts: int=10, selection: Callable[[MCTSNode, AgentID], MCTSNode]=uct) -> None:
+    def __init__(self, game: AlternatingGame, agent: AgentID, simulations: int=500, rollouts: int=10, selection: Callable[[MCTSNode, AgentID], MCTSNode]=uct, eval: Callable[[MCTSNode, AgentID], float] = default_eval) -> None:
         """
         Parameters:
             game: alternating game associated with the agent
@@ -40,7 +41,7 @@ class MonteCarloTreeSearch(Agent):
         self.simulations = simulations
         self.rollouts = rollouts
         self.selection = selection
-        self.eval_fn = self.game.eval_fn.get(agent, None)
+        self.eval = eval
         
     def action(self) -> ActionType:
         a, _ = self.mcts()
@@ -107,7 +108,12 @@ class MonteCarloTreeSearch(Agent):
             # accumulate rewards for each agent
             for agent in game.agents:
                 agent_idx = game.agent_name_mapping[agent]
-                rewards[agent_idx] += game.rewards[agent]
+                if game.terminated():
+                    # If game is terminated, we can get the rewards
+                    rewards[agent_idx] += game.rewards[agent]
+                else:
+                    # If game is not terminated, we can use the evaluation function
+                    rewards[agent_idx] += self.eval(game, agent)
         rewards /= self.rollouts  # Average rewards over rollouts
         return rewards
 
