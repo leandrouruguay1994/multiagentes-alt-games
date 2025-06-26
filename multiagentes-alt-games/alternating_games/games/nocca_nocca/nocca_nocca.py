@@ -7,7 +7,7 @@ from games.nocca_nocca.board import Player, BLACK, WHITE
 from games.nocca_nocca.board import Action
 
 class NoccaNocca(AlternatingGame):
-    def __init__(self, initial_player=None, max_steps=None, seed=None, render_mode='human', eval_fn={}):
+    def __init__(self, initial_player=None, max_steps=None, seed=None, render_mode='human'):
         super().__init__()
 
         self.metadata = {
@@ -157,13 +157,3 @@ class NoccaNocca(AlternatingGame):
     
         player = self.agent_name_mapping[agent]
         return 0. * player
-    
-    def eval_fn(self, agent: AgentID, eval_fn: callable) -> float:
-        if agent not in self.agents:
-            raise ValueError(f"Agent {agent} is not part of the game.")
-
-        if self.terminated():
-            return eval_fn(self.rewards[agent])
-    
-        player = self.agent_name_mapping[agent]
-        return eval_fn(0. * player)
