@@ -12,15 +12,15 @@ class MCTSNode:
         self.action = action
         self.children = []
         self.explored_children = 0
-        self.visits = 1
+        self.visits = 0
         self.value = 0
         self.cum_rewards = np.zeros(len(game.agents))
         self.agent = self.game.agent_selection
 
 def ucb(node, C=sqrt(2)) -> float:
     agent_idx = node.game.agent_name_mapping[node.agent]
-    #if node.visits==0:
-    #    return float('inf')
+    if node.visits==0:
+        return float('inf')
     return node.cum_rewards[agent_idx] / node.visits + C * sqrt(log(node.parent.visits)/node.visits)
 
 def uct(node: MCTSNode, agent: AgentID) -> MCTSNode:
@@ -123,12 +123,14 @@ class MonteCarloTreeSearch(Agent):
             if curr_node.explored_children < len(curr_node.children):
                 # TODO
                 # set curr_node to an unvisited child
-                curr_node = curr_node.children[curr_node.explored_children]
+                idx = curr_node.explored_children
                 curr_node.explored_children += 1
+                curr_node = curr_node.children[idx]    
             else:
                 # TODO
                 # set curr_node to a child using the selection function
-                curr_node = self.selection(curr_node, curr_node.agent)
+                #curr_node = self.selection(curr_node, curr_node.agent)
+                curr_node = self.selection(curr_node, self.agent)
         return curr_node
 
     def expand_node(self, node) -> None:
@@ -136,18 +138,23 @@ class MonteCarloTreeSearch(Agent):
         # if the game is not terminated: 
         #    play an available action in node
         #    create a new child node and add it to node children
-        if not node.game.terminated():
-            actions = node.game.available_actions()
-            np.random.shuffle(actions)
-            if actions:
-                action = np.random.choice(actions)
-                child_game = node.game.clone()
-                child_game.step(action)
-                # Create a new child node
-                child_node = MCTSNode(parent=node, game=child_game, action=action)
-                # Initialize child node
-                node.children.append(child_node)
-                #node.explored_children += 1
+        #if not node.game.terminated():
+        if node.game.terminated():
+            return
+        for action in node.game.available_actions():
+            # np.random.shuffle(actions)
+            # if actions:
+            #     action = np.random.choice(actions)
+            #     child_game = node.game.clone()
+            #     child_game.step(action)
+            #     # Create a new child node
+            #     child_node = MCTSNode(parent=node, game=child_game, action=action)
+            #     # Initialize child node
+            #     node.children.append(child_node)
+            #     #node.explored_children += 1
+            g = node.game.clone()
+            g.step(action)
+            node.children.append(MCTSNode(node, g, action))#, self.agent))
 
     def action_selection(self, node: MCTSNode) -> (ActionType, float):
         action: ActionType = None
