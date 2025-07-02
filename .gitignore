@@ -23,7 +23,7 @@ __pycache__/
 
 # Salida de notebooks exportados
 *.nbconvert.ipynb
-*.html
+#*.html
 
 # Directorios de VSCode
 .vscode/
