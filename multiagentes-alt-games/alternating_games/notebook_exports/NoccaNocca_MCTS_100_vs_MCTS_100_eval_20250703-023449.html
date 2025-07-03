@@ -7510,85 +7510,80 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8bafba6f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">games.tictactoe.tictactoe</span><span class="w"> </span><span class="kn">import</span> <span class="n">TicTacToe</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">games.nocca_nocca.nocca_nocca</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoccaNocca</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">agents.agent_random</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomAgent</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">agents.minimax</span><span class="w"> </span><span class="kn">import</span> <span class="n">MiniMax</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">agents.mcts</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloTreeSearch</span><span class="p">,</span> <span class="n">MCTSNode</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">agents.counterfactualregret_t</span><span class="w"> </span><span class="kn">import</span> <span class="n">CounterFactualRegret</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">agents.mcts</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloTreeSearch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">eval</span><span class="w"> </span><span class="kn">import</span> <span class="n">heuristic_nocca</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3ea7ab2e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="n">TicTacToe</span><span class="p">(</span><span class="n">render_mode</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="n">NoccaNocca</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">initial_player</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=c6575106">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">agents_rd</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">agent</span><span class="p">:</span> <span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">RandomAgent</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">agent</span><span class="p">)),</span> <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">))</span>
-<span class="n">agents_rd</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">agents</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="c1">#game.agents[1]: MiniMax(game=game, agent=game.agents[1], depth=4),</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">eval</span><span class="o">=</span><span class="n">heuristic_nocca</span><span class="p">,</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>{'X': &lt;agents.agent_random.RandomAgent at 0x10c5e8b10&gt;,
- 'O': &lt;agents.agent_random.RandomAgent at 0x1121598d0&gt;}</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=19bc6b07">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">game</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="k">while</span> <span class="ow">not</span> <span class="n">game</span><span class="o">.</span><span class="n">terminated</span><span class="p">():</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Initial Agent: </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">game</span><span class="o">.</span><span class="n">game_over</span><span class="p">():</span>
     <span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">))</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="n">agents_rd</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">()</span>
-    <span class="n">game</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="n">t_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">agents</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">()</span>
+    <span class="n">t_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Agent </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">t_f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t_i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds to choose action"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Turn </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">steps</span><span class="si">}</span><span class="s2"> -- Agent </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="si">}</span><span class="s2"> plays action </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">)</span>
 <span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">rewards</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">game</span><span class="o">.</span><span class="n">truncated</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Game was truncated"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reward agent </span><span class="si">{</span><span class="n">agent</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The winner is: </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">check_for_winner</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7601,213 +7596,365 @@ a.anchor-link {
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Player: X
-Board:
- .  .  . 
- .  .  . 
- .  .  . 
-
-0.0
-Player: O
-Board:
- .  .  . 
- X  .  . 
- .  .  . 
-
--0.25
-Player: X
-Board:
- .  O  . 
- X  .  . 
- .  .  . 
-
-0.0
-Player: O
-Board:
- .  O  . 
- X  .  X 
- .  .  . 
-
--0.125
-Player: X
-Board:
- .  O  . 
- X  .  X 
- O  .  . 
-
--0.25
-Player: O
-Board:
- X  O  . 
- X  .  X 
- O  .  . 
-
-0.0
-Player: X
-Board:
- X  O  . 
- X  .  X 
- O  O  . 
-
-0.0
-Player: O
-Board:
- X  O  X 
- X  .  X 
- O  O  . 
-
--0.125
-Player: X
-Board:
- X  O  X 
- X  .  X 
- O  O  O 
-
--1
-{'X': -1, 'O': 1}
+<pre>Initial Agent: Black
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ 0__ 0__ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ ___ ___ ___ ___ 
+6: 1__ 1__ 1__ 1__ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 83.23 seconds to choose action
+Turn 0 -- Agent Black plays action 66
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ 00_ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ ___ ___ ___ ___ 
+6: 1__ 1__ 1__ 1__ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 84.39 seconds to choose action
+Turn 1 -- Agent White plays action 266
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ 00_ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ ___ ___ ___ ___ 
+6: 1__ 1__ 11_ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 81.59 seconds to choose action
+Turn 2 -- Agent Black plays action 43
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 00_ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ ___ ___ ___ ___ 
+6: 1__ 1__ 11_ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 92.68 seconds to choose action
+Turn 3 -- Agent White plays action 261
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 00_ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ ___ ___ 
+6: 1__ 1__ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 112.32 seconds to choose action
+Turn 4 -- Agent Black plays action 62
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ ___ ___ 
+6: 1__ 1__ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 90.04 seconds to choose action
+Turn 5 -- Agent White plays action 214
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ ___ ___ ___ ___ 
+6: 1__ 1__ 11_ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 119.03 seconds to choose action
+Turn 6 -- Agent Black plays action 107
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ ___ 0__ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ ___ ___ ___ ___ 
+6: 1__ 1__ 11_ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 99.79 seconds to choose action
+Turn 7 -- Agent White plays action 247
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ ___ 0__ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ ___ ___ 
+6: ___ 1__ 11_ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 119.73 seconds to choose action
+Turn 8 -- Agent Black plays action 112
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 00_ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ ___ ___ 
+6: ___ 1__ 11_ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 101.98 seconds to choose action
+Turn 9 -- Agent White plays action 256
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 00_ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ 1__ ___ ___ 
+6: ___ 1__ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 114.33 seconds to choose action
+Turn 10 -- Agent Black plays action 74
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ 0__ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ 1__ ___ ___ 
+6: ___ 1__ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 93.93 seconds to choose action
+Turn 11 -- Agent White plays action 263
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ 0__ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ 1__ 1__ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 117.30 seconds to choose action
+Turn 12 -- Agent Black plays action 65
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ 1__ 1__ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 99.10 seconds to choose action
+Turn 13 -- Agent White plays action 219
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ 11_ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 101.78 seconds to choose action
+Turn 14 -- Agent Black plays action 110
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ 11_ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 90.96 seconds to choose action
+Turn 15 -- Agent White plays action 208
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ ___ ___ 
+5: ___ ___ ___ 11_ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 90.07 seconds to choose action
+Turn 16 -- Agent Black plays action 62
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ ___ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ ___ ___ 
+5: ___ ___ ___ 11_ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 107.16 seconds to choose action
+Turn 17 -- Agent White plays action 226
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ ___ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ ___ ___ 
+5: ___ ___ 1__ 1__ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 85.80 seconds to choose action
+Turn 18 -- Agent Black plays action 109
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ ___ ___ 
+5: ___ ___ 1__ 1__ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 84.11 seconds to choose action
+Turn 19 -- Agent White plays action 223
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ 0__ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ 1__ ___ 
+5: ___ ___ ___ 1__ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 70.79 seconds to choose action
+Turn 20 -- Agent Black plays action 54
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ 0__ 
+2: ___ ___ 0__ ___ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ 1__ ___ 
+5: ___ ___ ___ 1__ ___ 
+6: ___ 1__ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 64.91 seconds to choose action
+Turn 21 -- Agent White plays action 272
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ 0__ 
+2: ___ ___ 0__ ___ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ 1__ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ 1__ ___ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 70.50 seconds to choose action
+Turn 22 -- Agent Black plays action 76
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ 0__ 0__ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ 1__ ___ 1__ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ 1__ ___ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 77.34 seconds to choose action
+Turn 23 -- Agent White plays action 171
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ 0__ 0__ ___ 
+3: ___ ___ ___ ___ 0__ 
+4: ___ ___ 1__ 1__ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ 1__ ___ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 67.68 seconds to choose action
+Turn 24 -- Agent Black plays action 156
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ 0__ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ 1__ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ 1__ ___ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 65.04 seconds to choose action
+Turn 25 -- Agent White plays action 251
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ 0__ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ 1__ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 1__ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 64.96 seconds to choose action
+Turn 26 -- Agent Black plays action 185
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ 0__ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ 1__ 1__ ___ 
+5: ___ ___ ___ 10_ 1__ 
+6: ___ ___ 1__ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 51.35 seconds to choose action
+Turn 27 -- Agent White plays action 183
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ 0__ 0__ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: ___ ___ ___ 1__ ___ 
+5: ___ ___ ___ 10_ 1__ 
+6: ___ ___ 1__ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 46.08 seconds to choose action
+Turn 28 -- Agent Black plays action 99
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ ___ 00_ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: ___ ___ ___ 1__ ___ 
+5: ___ ___ ___ 10_ 1__ 
+6: ___ ___ 1__ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 48.02 seconds to choose action
+Turn 29 -- Agent White plays action 256
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ ___ 00_ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: ___ ___ ___ 1__ ___ 
+5: ___ ___ 1__ 10_ 1__ 
+6: ___ ___ ___ ___ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 53.64 seconds to choose action
+Turn 30 -- Agent Black plays action 230
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ ___ 00_ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: ___ ___ ___ 1__ ___ 
+5: ___ ___ 1__ 1__ 1__ 
+6: ___ ___ ___ ___ 0__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 37.87 seconds to choose action
+Turn 31 -- Agent White plays action 223
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ ___ 00_ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: ___ ___ ___ 11_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ ___ 0__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 23.10 seconds to choose action
+Turn 32 -- Agent Black plays action 273
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ 0__ ___ ___ 
+2: ___ ___ ___ 00_ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: ___ ___ ___ 11_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ ___ ___ 
+7: ___ ___ ___ ___ 0__ 
+Reward agent Black: 1
+Reward agent White: -1
+The winner is: Black
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0a193823">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">players</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="c1">#players[game.agents[0]] = MonteCarloTreeSearch(game=game, agent=game.agents[0], simulations=100)</span>
-<span class="c1">#players[game.agents[0]] = MiniMax(game=game, agent=game.agents[0], depth=3)</span>
-<span class="n">players</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">RandomAgent</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">players</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">game</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<span class="n">action</span> <span class="o">=</span> <span class="n">players</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-<span class="n">game</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-<span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">observe</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="n">action</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="n">players</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">]</span><span class="o">.</span><span class="n">mcts</span><span class="p">()</span>
-<span class="n">game</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-<span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Player: X
-Board:
- .  .  . 
- .  .  . 
- .  .  . 
-
-[[0 0 0]
- [0 0 0]
- [0 0 0]]
-0
-Player: O
-Board:
- X  .  . 
- .  .  . 
- .  .  . 
-
-[[2 0 0]
- [0 0 0]
- [0 0 0]]
-4 -0.06956521739130433
-Player: X
-Board:
- X  .  . 
- .  O  . 
- .  .  . 
-
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>    
-    <span class="n">game</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">game</span><span class="o">.</span><span class="n">terminated</span><span class="p">():</span>
-        <span class="n">agent</span> <span class="o">=</span> <span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span>
-        <span class="n">action</span> <span class="o">=</span> <span class="n">players</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">()</span>
-        <span class="n">game</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-        <span class="n">values</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">reward</span><span class="p">(</span><span class="n">agent</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Agent </span><span class="si">{</span><span class="n">agent</span><span class="si">}</span><span class="s2"> average reward: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">agent</span><span class="p">])</span><span class="si">}</span><span class="s2"> over </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> games"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Agent </span><span class="si">{</span><span class="n">agent</span><span class="si">}</span><span class="s2"> rewards: </span><span class="si">{</span><span class="n">values</span><span class="p">[</span><span class="n">agent</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Agent </span><span class="si">{</span><span class="n">agent</span><span class="si">}</span><span class="s2"> win rate: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="n">agent</span><span class="p">])</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> over </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> games"</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Agent X average reward: -0.78 over 50 games
-Agent X rewards: [-1, 1, 1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1, 0, -1, -1, -1, -1, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
-Agent X win rate: 4 over 50 games
-Agent O average reward: 0.78 over 50 games
-Agent O rewards: [1, -1, -1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1, 1, -1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-Agent O win rate: 43 over 50 games
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nbconvert</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTMLExporter</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">save_notebook_to_html</span><span class="p">(</span><span class="n">notebook_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"TicTacToe.ipynb"</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">save_notebook_to_html</span><span class="p">(</span><span class="n">notebook_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Nocca_Nocca.ipynb"</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Guarda el notebook como HTML"""</span>
     <span class="n">exporter</span> <span class="o">=</span> <span class="n">HTMLExporter</span><span class="p">()</span>
     <span class="n">notebook</span> <span class="o">=</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">notebook_path</span><span class="p">,</span> <span class="n">as_version</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -7815,7 +7962,7 @@ Agent O win rate: 43 over 50 games
     
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">"notebook_exports"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S"</span><span class="p">)</span>
-    <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"notebook_exports/TicTacToe_random_vs_MCTS_100sim_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">.html"</span>
+    <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"notebook_exports/NoccaNocca_MCTS_100_vs_MCTS_100_eval_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">.html"</span>
     
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
@@ -7826,12 +7973,12 @@ Agent O win rate: 43 over 50 games
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=53423d94">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [24]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">save_notebook_to_html</span><span class="p">()</span>
@@ -7845,9 +7992,9 @@ Agent O win rate: 43 over 50 games
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[24]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[28]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'notebook_exports/TicTacToe_MiniMax_depth3_vs_MCTS_100sim_20250701-092509.html'</pre>
+<pre>'notebook_exports/NoccaNocca_MCTS_100_vs_MiniMax_Depth4_20250702-103510.html'</pre>
 </div>
 </div>
 </div>
