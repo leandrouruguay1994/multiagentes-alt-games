@@ -7515,7 +7515,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">games.nocca_nocca.nocca_nocca</span><span class="w"> </span><span class="kn">import</span> <span class="n">NoccaNocca</span>
@@ -7523,6 +7523,7 @@ a.anchor-link {
 <span class="kn">from</span><span class="w"> </span><span class="nn">agents.minimax</span><span class="w"> </span><span class="kn">import</span> <span class="n">MiniMax</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">agents.mcts</span><span class="w"> </span><span class="kn">import</span> <span class="n">MonteCarloTreeSearch</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">eval</span><span class="w"> </span><span class="kn">import</span> <span class="n">heuristic_nocca</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 </pre></div>
 </div>
 </div>
@@ -7533,7 +7534,7 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">game</span> <span class="o">=</span> <span class="n">NoccaNocca</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">initial_player</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -7547,13 +7548,13 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [32]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">agents</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
-    <span class="c1">#game.agents[0]: MiniMax(game=game, agent=game.agents[0], depth=1),</span>
-    <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">eval</span><span class="o">=</span><span class="n">heuristic_nocca</span><span class="p">,</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">rollouts</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+    <span class="c1">#game.agents[1]: MiniMax(game=game, agent=game.agents[1], depth=4),</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">MonteCarloTreeSearch</span><span class="p">(</span><span class="n">game</span><span class="o">=</span><span class="n">game</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">eval</span><span class="o">=</span><span class="n">heuristic_nocca</span><span class="p">,</span> <span class="n">simulations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">rollouts</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -7565,15 +7566,28 @@ a.anchor-link {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">game</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Inicializar las estructuras para guardar los tiempos</span>
+<span class="n">times_by_agent</span> <span class="o">=</span> <span class="p">{</span><span class="n">agent</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">game</span><span class="o">.</span><span class="n">agents</span><span class="p">}</span>
+<span class="n">turns</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">game</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Initial Agent: </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">while</span> <span class="ow">not</span> <span class="n">game</span><span class="o">.</span><span class="n">game_over</span><span class="p">():</span>
     <span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="n">agents</span><span class="p">[</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Turn </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">steps</span><span class="si">}</span><span class="s2"> -- Agent </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span><span class="si">}</span><span class="s2"> plays action </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">agent_id</span> <span class="o">=</span> <span class="n">game</span><span class="o">.</span><span class="n">agent_selection</span>
+    <span class="n">t_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">agents</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">action</span><span class="p">()</span>
+    <span class="n">t_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">t_f</span> <span class="o">-</span> <span class="n">t_i</span>
+    <span class="n">times_by_agent</span><span class="p">[</span><span class="n">agent_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elapsed</span><span class="p">)</span>
+    <span class="n">turns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds to choose action"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Turn </span><span class="si">{</span><span class="n">game</span><span class="o">.</span><span class="n">steps</span><span class="si">}</span><span class="s2"> -- Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2"> plays action </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="n">game</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">)</span>
 <span class="n">game</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">game</span><span class="o">.</span><span class="n">truncated</span><span class="p">():</span>
@@ -7602,6 +7616,7 @@ a.anchor-link {
 5: ___ ___ ___ ___ ___ 
 6: 1__ 1__ 1__ 1__ 1__ 
 7: ___ ___ ___ ___ ___ 
+Agent Black took 34.87 seconds to choose action
 Turn 0 -- Agent Black plays action 49
 0: ___ ___ ___ ___ ___ 
 1: 0__ ___ 0__ 0__ 0__ 
@@ -7611,1352 +7626,599 @@ Turn 0 -- Agent Black plays action 49
 5: ___ ___ ___ ___ ___ 
 6: 1__ 1__ 1__ 1__ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 1 -- Agent White plays action 243
+Agent White took 35.56 seconds to choose action
+Turn 1 -- Agent White plays action 247
 0: ___ ___ ___ ___ ___ 
 1: 0__ ___ 0__ 0__ 0__ 
 2: ___ 0__ ___ ___ ___ 
 3: ___ ___ ___ ___ ___ 
 4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ 1__ 1__ 1__ 
+5: ___ 1__ ___ ___ ___ 
+6: ___ 1__ 1__ 1__ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 2 -- Agent Black plays action 95
+Agent Black took 33.21 seconds to choose action
+Turn 2 -- Agent Black plays action 58
 0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 00_ 0__ 0__ 
+1: 0__ 0__ ___ 0__ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: ___ 1__ ___ ___ ___ 
+6: ___ 1__ 1__ 1__ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 35.06 seconds to choose action
+Turn 3 -- Agent White plays action 253
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ ___ 0__ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ ___ ___ 
+5: 1__ 1__ ___ ___ ___ 
+6: ___ ___ 1__ 1__ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 32.07 seconds to choose action
+Turn 4 -- Agent Black plays action 89
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ ___ 0__ 0__ 
 2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
 4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ 1__ 1__ 1__ 
+5: 1__ 1__ ___ ___ ___ 
+6: ___ ___ 1__ 1__ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 3 -- Agent White plays action 266
+Agent White took 30.77 seconds to choose action
+Turn 5 -- Agent White plays action 271
 0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 00_ 0__ 0__ 
+1: 0__ 0__ ___ 0__ 0__ 
 2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
 4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ 11_ ___ 1__ 
+5: 1__ 1__ ___ ___ 1__ 
+6: ___ ___ 1__ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 4 -- Agent Black plays action 76
+Agent Black took 29.71 seconds to choose action
+Turn 6 -- Agent Black plays action 41
 0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 00_ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ 11_ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 5 -- Agent White plays action 258
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 00_ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 111 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 6 -- Agent Black plays action 57
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ 0__ ___ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 111 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 7 -- Agent White plays action 250
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ 0__ ___ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: 1__ 11_ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 8 -- Agent Black plays action 67
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ ___ 0__ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: 1__ 11_ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 9 -- Agent White plays action 250
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ ___ 0__ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: 11_ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 10 -- Agent Black plays action 105
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ ___ 0__ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: 11_ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 11 -- Agent White plays action 259
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ ___ 0__ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: 11_ 1__ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 12 -- Agent Black plays action 62
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: 11_ 1__ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 13 -- Agent White plays action 240
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: 1__ ___ ___ ___ ___ 
-6: 1__ 1__ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 14 -- Agent Black plays action 107
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ 0__ ___ 0__ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: 1__ ___ ___ ___ ___ 
-6: 1__ 1__ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 15 -- Agent White plays action 203
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ 0__ ___ 0__ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: 1__ 1__ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 16 -- Agent Black plays action 116
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 00_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: 1__ 1__ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 17 -- Agent White plays action 243
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 00_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 11_ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 18 -- Agent Black plays action 97
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ 0__ 00_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 11_ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 19 -- Agent White plays action 209
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ 0__ 00_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 111 ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 20 -- Agent Black plays action 141
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ 0__ ___ ___ ___ 
-3: ___ ___ ___ 00_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 111 ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 21 -- Agent White plays action 248
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ 0__ ___ ___ ___ 
-3: ___ ___ ___ 00_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 11_ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 22 -- Agent Black plays action 147
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ 0__ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 11_ ___ 1__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 23 -- Agent White plays action 266
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ 0__ 
-2: ___ 0__ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 11_ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 24 -- Agent Black plays action 43
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ 0__ 
-2: ___ 0__ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 11_ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 25 -- Agent White plays action 255
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ 0__ 
-2: ___ 0__ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 26 -- Agent Black plays action 90
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ 0__ 
+1: ___ 0__ ___ 0__ 0__ 
 2: 0__ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
+3: ___ 0__ ___ ___ ___ 
 4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ 1__ 1__ ___ 1__ 
+5: 1__ 1__ ___ ___ 1__ 
+6: ___ ___ 1__ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 27 -- Agent White plays action 261
+Agent White took 29.74 seconds to choose action
+Turn 7 -- Agent White plays action 208
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ 0__ 
+1: ___ 0__ ___ 0__ 0__ 
 2: 0__ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 11_ 1__ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 28 -- Agent Black plays action 87
+Agent Black took 29.04 seconds to choose action
+Turn 8 -- Agent Black plays action 50
+0: ___ ___ ___ ___ ___ 
+1: 0__ ___ ___ 0__ 0__ 
+2: 0__ ___ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 29.55 seconds to choose action
+Turn 9 -- Agent White plays action 237
+0: ___ ___ ___ ___ ___ 
+1: 0__ ___ ___ 0__ 0__ 
+2: 0__ ___ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ 1__ ___ 
+5: 1__ ___ ___ ___ ___ 
+6: ___ ___ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 30.80 seconds to choose action
+Turn 10 -- Agent Black plays action 87
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ ___ 0__ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ 1__ ___ 
+5: 1__ ___ ___ ___ ___ 
+6: ___ ___ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 28.89 seconds to choose action
+Turn 11 -- Agent White plays action 190
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ ___ 0__ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 28.87 seconds to choose action
+Turn 12 -- Agent Black plays action 65
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ ___ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 28.79 seconds to choose action
+Turn 13 -- Agent White plays action 274
+0: ___ ___ ___ ___ ___ 
+1: 0__ 0__ ___ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 29.25 seconds to choose action
+Turn 14 -- Agent Black plays action 43
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ ___ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 29.91 seconds to choose action
+Turn 15 -- Agent White plays action 170
+0: ___ ___ ___ ___ ___ 
+1: ___ 00_ ___ ___ 0__ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: 1__ ___ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 28.92 seconds to choose action
+Turn 16 -- Agent Black plays action 105
 0: ___ ___ ___ ___ ___ 
 1: ___ 00_ ___ ___ 0__ 
 2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 11_ 1__ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ ___ ___ ___ ___ 
+5: 1__ ___ ___ ___ 1__ 
+6: ___ ___ 1__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 29 -- Agent White plays action 221
+Agent White took 28.10 seconds to choose action
+Turn 17 -- Agent White plays action 207
 0: ___ ___ ___ ___ ___ 
 1: ___ 00_ ___ ___ 0__ 
 2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 30 -- Agent Black plays action 51
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ 0__ ___ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ 0__ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 31 -- Agent White plays action 168
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ 0__ ___ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 32 -- Agent Black plays action 59
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ 0__ 0__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 33 -- Agent White plays action 215
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ 0__ 0__ 
-4: ___ ___ 1__ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 34 -- Agent Black plays action 150
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ ___ 0__ 
-4: ___ ___ 1__ ___ 0__ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 35 -- Agent White plays action 178
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ ___ 0__ 
-4: ___ 1__ ___ ___ 0__ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 36 -- Agent Black plays action 51
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ ___ 0__ 
-4: ___ 1__ ___ ___ 0__ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 37 -- Agent White plays action 214
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ ___ 0__ 
-4: ___ 1__ ___ ___ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 38 -- Agent Black plays action 76
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ ___ 0__ 
-4: ___ 1__ ___ ___ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 39 -- Agent White plays action 171
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ ___ 0__ 
-4: ___ ___ 1__ ___ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 40 -- Agent Black plays action 154
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ ___ 1__ ___ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 41 -- Agent White plays action 258
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ ___ 1__ ___ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 42 -- Agent Black plays action 193
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ ___ 1__ ___ ___ 
-5: ___ ___ ___ ___ 0__ 
-6: ___ 11_ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 43 -- Agent White plays action 183
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ 0__ 
-6: ___ 11_ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 44 -- Agent Black plays action 236
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ ___ 0__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 45 -- Agent White plays action 146
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ 1__ 0__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ ___ 0__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 46 -- Agent Black plays action 150
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ 1__ ___ ___ 
-4: ___ ___ ___ ___ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ ___ 0__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 47 -- Agent White plays action 142
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ ___ ___ 
-4: ___ ___ ___ 1__ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ ___ 0__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 48 -- Agent Black plays action 105
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ ___ ___ 1__ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 11_ ___ 0__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 49 -- Agent White plays action 251
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ ___ ___ 1__ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 1__ 0__ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 50 -- Agent Black plays action 266
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ ___ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ ___ ___ 1__ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 10_ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 51 -- Agent White plays action 129
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ 1__ ___ 1__ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 10_ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 52 -- Agent Black plays action 57
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ 1__ ___ 1__ 0__ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ 10_ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 53 -- Agent White plays action 248
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ 1__ ___ 1__ 0__ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ 10_ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 54 -- Agent Black plays action 261
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: ___ 1__ ___ 1__ 0__ 
-5: ___ 10_ ___ ___ ___ 
-6: ___ ___ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 55 -- Agent White plays action 170
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: 1__ ___ ___ 1__ 0__ 
-5: ___ 10_ ___ ___ ___ 
-6: ___ ___ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 56 -- Agent Black plays action 213
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: 10_ ___ ___ 1__ 0__ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ 1__ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 57 -- Agent White plays action 261
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: 10_ ___ ___ 1__ 0__ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 58 -- Agent Black plays action 151
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ 0__ 
-3: ___ ___ ___ ___ ___ 
-4: 10_ ___ ___ 1__ 0__ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 59 -- Agent White plays action 212
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ 0__ 
-3: ___ ___ ___ ___ ___ 
-4: 10_ ___ ___ 1__ 0__ 
-5: ___ 1__ ___ ___ ___ 
-6: 1__ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 60 -- Agent Black plays action 197
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ 0__ 
-3: ___ ___ ___ 0__ ___ 
-4: 10_ ___ ___ 1__ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: 1__ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 61 -- Agent White plays action 247
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ 0__ 
-3: ___ ___ ___ 0__ ___ 
-4: 10_ ___ ___ 1__ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 62 -- Agent Black plays action 103
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 00_ ___ 
-2: ___ ___ ___ ___ 0__ 
-3: ___ ___ ___ 0__ ___ 
-4: 10_ ___ ___ 1__ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 63 -- Agent White plays action 213
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 00_ ___ 
-2: ___ ___ ___ ___ 0__ 
-3: ___ ___ ___ 0__ ___ 
-4: 101 ___ ___ 1__ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 64 -- Agent Black plays action 112
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 00_ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 0__ ___ 
-4: 101 ___ ___ 1__ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 65 -- Agent White plays action 189
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 00_ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ 1__ 0__ ___ 
-4: 101 ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 66 -- Agent Black plays action 66
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ 1__ 0__ ___ 
-4: 101 ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 67 -- Agent White plays action 166
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ 1__ 0__ ___ 
-4: 10_ ___ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 68 -- Agent Black plays action 163
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ 1__ 0__ ___ 
-4: 1__ 0__ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 69 -- Agent White plays action 139
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 01_ ___ 
-4: 1__ 0__ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 70 -- Agent Black plays action 173
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 71 -- Agent White plays action 212
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: 1__ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 72 -- Agent Black plays action 58
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: 1__ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 73 -- Agent White plays action 247
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ 0__ 
-2: ___ ___ ___ ___ ___ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 74 -- Agent Black plays action 73
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ ___ 
-2: ___ ___ ___ ___ 0__ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ 11_ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 75 -- Agent White plays action 208
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 0__ ___ 
-2: ___ ___ ___ ___ 0__ 
-3: 0__ ___ ___ 01_ ___ 
+3: ___ 0__ ___ 0__ ___ 
 4: 1__ 1__ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ 1__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 76 -- Agent Black plays action 54
+Agent Black took 27.24 seconds to choose action
+Turn 18 -- Agent Black plays action 50
 0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ 0__ 
-3: 0__ ___ ___ 01_ ___ 
+1: 0__ 0__ ___ ___ 0__ 
+2: ___ ___ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
 4: 1__ 1__ ___ ___ ___ 
-5: ___ 1__ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ 1__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 77 -- Agent White plays action 208
+Agent White took 27.66 seconds to choose action
+Turn 19 -- Agent White plays action 256
 0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ 0__ ___ 0__ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ 11_ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 78 -- Agent Black plays action 65
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ ___ 0__ 0__ 0__ 
-3: 0__ ___ ___ 01_ ___ 
-4: 1__ 11_ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 79 -- Agent White plays action 163
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ ___ 0__ 0__ 0__ 
-3: 0__ ___ ___ 01_ ___ 
-4: ___ 111 ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 80 -- Agent Black plays action 102
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ ___ ___ 0__ 0__ 
-3: 0__ ___ ___ 010 ___ 
-4: ___ 111 ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 81 -- Agent White plays action 175
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ ___ ___ 0__ 0__ 
-3: 0__ ___ 1__ 010 ___ 
-4: ___ 11_ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 82 -- Agent Black plays action 117
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: 0__ ___ 1__ 010 ___ 
-4: ___ 11_ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 83 -- Agent White plays action 142
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: 0__ ___ ___ 010 ___ 
-4: ___ 11_ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 84 -- Agent Black plays action 126
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 85 -- Agent White plays action 277
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ 0__ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 ___ 1__ ___ 
-5: ___ ___ ___ 1__ ___ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 86 -- Agent Black plays action 109
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
+1: 0__ 0__ ___ ___ 0__ 
 2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 ___ 1__ ___ 
-5: ___ ___ ___ 1__ ___ 
-6: ___ ___ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ 1__ ___ ___ ___ 
+5: ___ ___ 1__ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 87 -- Agent White plays action 229
+Agent Black took 28.95 seconds to choose action
+Turn 20 -- Agent Black plays action 46
 0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ 0__ ___ 
-2: ___ ___ ___ ___ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 1__ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ 0__ ___ ___ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ 1__ ___ ___ ___ 
+5: ___ ___ 1__ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 88 -- Agent Black plays action 65
+Agent White took 27.20 seconds to choose action
+Turn 21 -- Agent White plays action 219
 0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ ___ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 1__ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ 0__ ___ ___ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ 1__ ___ ___ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 89 -- Agent White plays action 190
+Agent Black took 27.06 seconds to choose action
+Turn 22 -- Agent Black plays action 50
 0: ___ ___ ___ ___ ___ 
-1: ___ ___ 0__ ___ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 1__ ___ ___ 
+1: 0__ ___ ___ ___ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ 1__ ___ ___ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 26.09 seconds to choose action
+Turn 23 -- Agent White plays action 224
+0: ___ ___ ___ ___ ___ 
+1: 0__ ___ ___ ___ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ 1__ ___ 1__ ___ 
 5: ___ ___ ___ ___ 1__ 
-6: ___ ___ ___ ___ ___ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 90 -- Agent Black plays action 58
+Agent Black took 25.20 seconds to choose action
+Turn 24 -- Agent Black plays action 46
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ ___ ___ 010 ___ 
-4: ___ 110 1__ ___ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: ___ 00_ ___ ___ ___ 
+3: ___ 0__ ___ 0__ ___ 
+4: 1__ 1__ ___ 1__ ___ 
 5: ___ ___ ___ ___ 1__ 
-6: ___ ___ ___ ___ ___ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 91 -- Agent White plays action 181
+Agent White took 27.01 seconds to choose action
+Turn 25 -- Agent White plays action 167
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: ___ ___ ___ 0__ ___ 
-3: ___ 1__ ___ 010 ___ 
-4: ___ 110 ___ ___ ___ 
-5: ___ ___ ___ ___ 1__ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 92 -- Agent Black plays action 149
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ 110 ___ ___ ___ 
-5: ___ ___ ___ ___ 1__ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 93 -- Agent White plays action 234
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: ___ ___ 0__ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ 110 ___ ___ ___ 
-5: ___ ___ ___ 1__ ___ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 94 -- Agent Black plays action 98
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: ___ 0__ ___ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ 110 ___ ___ ___ 
-5: ___ ___ ___ 1__ ___ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 95 -- Agent White plays action 230
-0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: ___ 0__ ___ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ 110 ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 96 -- Agent Black plays action 54
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ 0__ 0__ 0__ ___ 
-3: ___ 1__ ___ 01_ ___ 
-4: ___ 110 ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 97 -- Agent White plays action 145
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ 0__ 0__ 0__ ___ 
-3: ___ 1__ ___ 0__ ___ 
-4: ___ 110 ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 98 -- Agent Black plays action 144
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ 0__ 0__ 00_ ___ 
-3: ___ 1__ ___ ___ ___ 
-4: ___ 110 ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 99 -- Agent White plays action 131
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ 0__ 0__ 00_ ___ 
-3: ___ ___ 1__ ___ ___ 
-4: ___ 110 ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 100 -- Agent Black plays action 173
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ 0__ 0__ 00_ ___ 
-3: 0__ ___ 1__ ___ ___ 
-4: ___ 11_ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 101 -- Agent White plays action 168
-0: ___ ___ ___ ___ ___ 
-1: ___ ___ ___ ___ ___ 
-2: ___ 0__ 0__ 00_ ___ 
-3: 0__ 1__ 1__ ___ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: ___ 00_ ___ ___ ___ 
+3: ___ 01_ ___ 0__ ___ 
 4: ___ 1__ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 102 -- Agent Black plays action 93
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ 0__ 00_ ___ 
-3: 0__ 1__ 1__ ___ ___ 
-4: ___ 1__ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 103 -- Agent White plays action 143
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ 0__ 001 ___ 
-3: 0__ 1__ ___ ___ ___ 
-4: ___ 1__ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 104 -- Agent Black plays action 102
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ ___ 001 ___ 
-3: 0__ 1__ ___ 0__ ___ 
-4: ___ 1__ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 105 -- Agent White plays action 172
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ ___ 001 ___ 
-3: 0__ 1__ ___ 0__ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: 1__ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 106 -- Agent Black plays action 147
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ ___ 001 ___ 
-3: 0__ 1__ ___ ___ 0__ 
-4: ___ ___ ___ 1__ ___ 
-5: 1__ ___ ___ ___ ___ 
-6: ___ ___ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 107 -- Agent White plays action 206
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ ___ 001 ___ 
-3: 0__ 1__ ___ ___ 0__ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 108 -- Agent Black plays action 152
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ ___ 001 0__ 
-3: 0__ 1__ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 109 -- Agent White plays action 130
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ ___ 001 0__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 110 -- Agent Black plays action 117
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ 0__ ___ 
-2: ___ ___ ___ 001 ___ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 111 -- Agent White plays action 107
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ 0__ ___ 
-2: ___ ___ ___ 00_ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 112 -- Agent Black plays action 68
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ 0__ 00_ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 113 -- Agent White plays action 188
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ ___ ___ ___ 
-2: ___ ___ 0__ 00_ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 114 -- Agent Black plays action 101
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ ___ ___ ___ 
-2: ___ ___ ___ 00_ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 115 -- Agent White plays action 223
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ ___ ___ ___ 
-2: ___ ___ ___ 00_ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 116 -- Agent Black plays action 109
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ ___ 0__ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ 1__ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 117 -- Agent White plays action 186
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ ___ 0__ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ 1__ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 118 -- Agent Black plays action 106
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ 0__ ___ 1__ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ 1__ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 119 -- Agent White plays action 176
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ 0__ ___ 1__ 
-3: 01_ ___ 1__ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 120 -- Agent Black plays action 49
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ ___ ___ 
-2: ___ 0__ 0__ ___ 1__ 
-3: 01_ ___ 1__ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 121 -- Agent White plays action 139
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 0__ ___ ___ 
-2: ___ 0__ 0__ ___ 1__ 
-3: 01_ ___ ___ 1__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 122 -- Agent Black plays action 96
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 00_ ___ ___ 
-2: ___ 0__ ___ ___ 1__ 
-3: 01_ ___ ___ 1__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ ___ 1__ 
-7: ___ ___ ___ ___ ___ 
-Turn 123 -- Agent White plays action 272
-0: ___ ___ ___ ___ ___ 
-1: 0__ ___ 00_ ___ ___ 
-2: ___ 0__ ___ ___ 1__ 
-3: 01_ ___ ___ 1__ ___ 
-4: ___ ___ ___ ___ ___ 
 5: ___ ___ ___ ___ 1__ 
-6: ___ 1__ ___ ___ ___ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 124 -- Agent Black plays action 88
+Agent Black took 23.90 seconds to choose action
+Turn 26 -- Agent Black plays action 145
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 00_ ___ ___ 
-2: ___ ___ ___ ___ 1__ 
-3: 01_ ___ ___ 1__ ___ 
-4: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: ___ 00_ ___ ___ ___ 
+3: ___ 01_ ___ ___ ___ 
+4: ___ 1__ ___ 10_ ___ 
 5: ___ ___ ___ ___ 1__ 
-6: ___ 1__ ___ ___ ___ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 125 -- Agent White plays action 236
+Agent White took 21.62 seconds to choose action
+Turn 27 -- Agent White plays action 134
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 00_ ___ ___ 
-2: ___ ___ ___ ___ 1__ 
-3: 01_ ___ ___ 1__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ 1__ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: ___ 00_ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ 1__ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 126 -- Agent Black plays action 57
+Agent Black took 22.26 seconds to choose action
+Turn 28 -- Agent Black plays action 92
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ 0__ ___ 1__ 
-3: 01_ ___ ___ 1__ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ 1__ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: 0__ 0__ ___ ___ ___ 
+4: ___ 1__ 1__ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 127 -- Agent White plays action 151
+Agent White took 21.88 seconds to choose action
+Turn 29 -- Agent White plays action 170
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ 0__ ___ 11_ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ 1__ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: ___ 0__ ___ ___ ___ 
+3: 0__ 0__ ___ ___ ___ 
+4: 1__ ___ 1__ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 128 -- Agent Black plays action 103
+Agent Black took 21.78 seconds to choose action
+Turn 30 -- Agent Black plays action 120
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ 0__ ___ 
-2: ___ ___ ___ ___ 11_ 
-3: 01_ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ 1__ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: 0__ 0__ ___ ___ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: 1__ ___ 1__ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 129 -- Agent White plays action 126
+Agent White took 22.53 seconds to choose action
+Turn 31 -- Agent White plays action 183
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ 0__ ___ 
-2: ___ ___ ___ ___ 11_ 
-3: 0__ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ 1__ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: 0__ 0__ ___ ___ ___ 
+3: ___ 0__ ___ 1__ ___ 
+4: 1__ ___ ___ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 130 -- Agent Black plays action 68
+Agent Black took 21.91 seconds to choose action
+Turn 32 -- Agent Black plays action 90
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ 0__ ___ 11_ 
-3: 0__ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ ___ ___ ___ ___ 
-6: ___ 1__ ___ 1__ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ 0__ ___ 1__ ___ 
+4: 1__ ___ ___ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 131 -- Agent White plays action 269
+Agent White took 22.10 seconds to choose action
+Turn 33 -- Agent White plays action 267
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: ___ ___ 0__ ___ 11_ 
-3: 0__ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ 0__ ___ 1__ ___ 
+4: 1__ ___ ___ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 132 -- Agent Black plays action 120
+Agent Black took 21.25 seconds to choose action
+Turn 34 -- Agent Black plays action 134
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: 0__ ___ 0__ ___ 11_ 
+1: ___ ___ ___ ___ 0__ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ ___ ___ 1__ ___ 
+4: 1__ ___ 0__ 10_ ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ ___ 1__ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 20.04 seconds to choose action
+Turn 35 -- Agent White plays action 145
+0: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ 0__ 
+2: 00_ ___ ___ ___ ___ 
 3: ___ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+4: 1__ ___ 0__ 101 ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 133 -- Agent White plays action 113
+Agent Black took 19.79 seconds to choose action
+Turn 36 -- Agent Black plays action 76
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ 0__ ___ ___ 
-2: 0__ ___ 0__ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: 1__ ___ 0__ 101 ___ 
+5: ___ ___ ___ ___ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 134 -- Agent Black plays action 57
+Agent White took 23.95 seconds to choose action
+Turn 37 -- Agent White plays action 185
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ ___ ___ ___ 
-2: 0__ ___ 00_ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: ___ 1__ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: 1__ ___ 0__ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 135 -- Agent White plays action 170
+Agent Black took 21.59 seconds to choose action
+Turn 38 -- Agent Black plays action 108
 0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ ___ ___ ___ 
-2: 0__ ___ 00_ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ ___ 0__ ___ ___ 
+4: 1__ ___ 0__ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 136 -- Agent Black plays action 46
+Agent White took 21.67 seconds to choose action
+Turn 39 -- Agent White plays action 274
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ 0__ 00_ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: 1__ ___ ___ ___ ___ 
-5: ___ ___ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ ___ 0__ ___ ___ 
+4: 1__ ___ 0__ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 137 -- Agent White plays action 166
+Agent Black took 21.77 seconds to choose action
+Turn 40 -- Agent Black plays action 177
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ 0__ 00_ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ ___ 0__ ___ ___ 
+4: 1__ ___ ___ 10_ ___ 
+5: ___ ___ 0__ 1__ 1__ 
+6: ___ ___ ___ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 138 -- Agent Black plays action 89
+Agent White took 18.62 seconds to choose action
+Turn 41 -- Agent White plays action 267
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ ___ 00_ ___ 1__ 
-3: ___ 0__ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ 1__ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ ___ ___ 
+3: ___ ___ 0__ ___ ___ 
+4: 1__ ___ ___ 10_ ___ 
+5: ___ ___ 0__ 1__ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 139 -- Agent White plays action 255
+Agent Black took 19.80 seconds to choose action
+Turn 42 -- Agent Black plays action 143
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ ___ 00_ ___ 1__ 
-3: ___ 0__ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: 1__ ___ ___ 10_ ___ 
+5: ___ ___ 0__ 1__ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 140 -- Agent Black plays action 98
+Agent White took 18.69 seconds to choose action
+Turn 43 -- Agent White plays action 161
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ 0__ 0__ ___ 1__ 
-3: ___ 0__ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ 10_ ___ 
+5: 1__ ___ 0__ 1__ 1__ 
+6: ___ ___ ___ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 141 -- Agent White plays action 114
+Agent Black took 18.60 seconds to choose action
+Turn 44 -- Agent Black plays action 217
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ 0__ 0__ 1__ ___ 
-3: ___ 0__ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ ___ ___ 10_ ___ 
+5: 1__ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 142 -- Agent Black plays action 128
+Agent White took 13.85 seconds to choose action
+Turn 45 -- Agent White plays action 207
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ 00_ 0__ 1__ ___ 
-3: ___ ___ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 00_ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ 1__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 143 -- Agent White plays action 107
+Agent Black took 8.32 seconds to choose action
+Turn 46 -- Agent Black plays action 86
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ ___ ___ 
-2: 0__ 00_ 0__ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 0__ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ ___ 1__ 
 7: ___ ___ ___ ___ ___ 
-Turn 144 -- Agent Black plays action 50
+Agent White took 12.42 seconds to choose action
+Turn 47 -- Agent White plays action 274
+0: ___ ___ ___ ___ ___ 
+1: ___ ___ ___ ___ ___ 
+2: 0__ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 8.81 seconds to choose action
+Turn 48 -- Agent Black plays action 80
 0: ___ ___ ___ ___ ___ 
 1: 0__ ___ ___ ___ ___ 
-2: 0__ 00_ 0__ ___ 1__ 
-3: ___ ___ ___ ___ 1__ 
-4: ___ ___ ___ ___ ___ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ 1__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 145 -- Agent White plays action 153
+Agent White took 14.26 seconds to choose action
+Turn 49 -- Agent White plays action 173
 0: ___ ___ ___ ___ ___ 
 1: 0__ ___ ___ ___ ___ 
-2: 0__ 00_ 0__ ___ 1__ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ 1__ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+2: ___ ___ ___ 0__ ___ 
+3: 1__ 0__ ___ ___ ___ 
+4: ___ ___ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 146 -- Agent Black plays action 87
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ ___ ___ ___ 
-2: ___ 00_ 0__ ___ 1__ 
-3: ___ ___ ___ ___ ___ 
-4: ___ ___ ___ ___ 1__ 
-5: ___ 1__ 11_ ___ ___ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 147 -- Agent White plays action 221
-0: ___ ___ ___ ___ ___ 
-1: 0__ 0__ ___ ___ ___ 
-2: ___ 00_ 0__ ___ 1__ 
-3: ___ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ 1__ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ ___ ___ ___ ___ 
-7: ___ ___ ___ ___ ___ 
-Turn 148 -- Agent Black plays action 41
+Agent Black took 7.36 seconds to choose action
+Turn 50 -- Agent Black plays action 43
 0: ___ ___ ___ ___ ___ 
 1: ___ 0__ ___ ___ ___ 
-2: 0__ 00_ 0__ ___ 1__ 
-3: ___ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ 1__ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+2: ___ ___ ___ 0__ ___ 
+3: 1__ 0__ ___ ___ ___ 
+4: ___ ___ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Turn 149 -- Agent White plays action 117
+Agent White took 12.20 seconds to choose action
+Turn 51 -- Agent White plays action 120
 0: ___ ___ ___ ___ ___ 
-1: ___ 0__ ___ 1__ ___ 
-2: 0__ 00_ 0__ ___ ___ 
-3: ___ ___ ___ ___ ___ 
-4: ___ 1__ ___ ___ 1__ 
-5: ___ 1__ 1__ ___ ___ 
-6: ___ ___ ___ ___ ___ 
+1: ___ 0__ ___ ___ ___ 
+2: 1__ ___ ___ 0__ ___ 
+3: ___ 0__ ___ ___ ___ 
+4: ___ ___ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
 7: ___ ___ ___ ___ ___ 
-Game was truncated
-Reward agent Black: 0
-Reward agent White: 0
-The winner is: None
+Agent Black took 8.48 seconds to choose action
+Turn 52 -- Agent Black plays action 129
+0: ___ ___ ___ ___ ___ 
+1: ___ 0__ ___ ___ ___ 
+2: 1__ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ 0__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 9.48 seconds to choose action
+Turn 53 -- Agent White plays action 87
+0: ___ ___ ___ ___ ___ 
+1: ___ 01_ ___ ___ ___ 
+2: ___ ___ ___ 0__ ___ 
+3: ___ ___ ___ ___ ___ 
+4: ___ 0__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent Black took 5.01 seconds to choose action
+Turn 54 -- Agent Black plays action 107
+0: ___ ___ ___ ___ ___ 
+1: ___ 01_ ___ ___ ___ 
+2: ___ ___ ___ ___ 0__ 
+3: ___ ___ ___ ___ ___ 
+4: ___ 0__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Agent White took 5.48 seconds to choose action
+Turn 55 -- Agent White plays action 48
+0: ___ 1__ ___ ___ ___ 
+1: ___ 0__ ___ ___ ___ 
+2: ___ ___ ___ ___ 0__ 
+3: ___ ___ ___ ___ ___ 
+4: ___ 0__ ___ 10_ ___ 
+5: ___ ___ ___ 1__ 1__ 
+6: ___ ___ 0__ 1__ ___ 
+7: ___ ___ ___ ___ ___ 
+Reward agent Black: -1
+Reward agent White: 1
+The winner is: White
 </pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=11e8b730">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Graficar tiempos por turno</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">times</span> <span class="ow">in</span> <span class="n">times_by_agent</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Agent </span><span class="si">{</span><span class="n">agent_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Agent Turns"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">"Time (seconds)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Execution time for each agent per turn"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
+<img alt="No description has been provided for this image" class="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA90AAAHqCAYAAAAZLi26AAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjEsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvc2/+5QAAAAlwSFlzAAAPYQAAD2EBqD+naQAAv4FJREFUeJzs3XdcVfUbwPHPvZfL3ktEliLi3lsBza05UjMzS9PKbZqV9WupmVZWjoZlWpZpOXPvheLeOHGhqIgIKCAb7vn9cRQlHIDARX3er9d53XvPPed7nnP5gj73uzSKoigIIYQQQgghhBCi0GmNHYAQQgghhBBCCPG0kqRbCCGEEEIIIYQoIpJ0CyGEEEIIIYQQRUSSbiGEEEIIIYQQoohI0i2EEEIIIYQQQhQRSbqFEEIIIYQQQogiIkm3EEIIIYQQQghRRCTpFkIIIYQQQgghiogk3UIIIYQQQgghRBGRpFsIIUSx2rp1KxqNhq1btxo7lGwlMabMzEzef/99PD090Wq1dOnSxdghFbrZs2ej0WjYv3+/sUMRQgghiowk3UIIUcLcSUQetO3evdvYIebJTz/9xOzZs40dRg4lMaYH+e2335g0aRLdu3fnjz/+YOTIkcYOSRRAZGQkY8aM4fDhw8YOJc9Wr17NmDFjjB2GEEI8NUyMHYAQQoj7GzduHGXLls21v3z58kaIJv9++uknnJ2d6du3b479gYGBpKSkYGpqKjE9xObNmylTpgyTJ082dijiMURGRjJ27Fh8fHyoWbOmscPJk9WrV/Pjjz9K4i2EEIVEkm4hhCih2rVrR926dY0dRqHTarWYm5sbO4wcSmJM0dHR2NvbF1p5BoOB9PT0EnefwjiSk5OxtLQs1msmJSVhZWVVrNcUQoiSQLqXCyHEE+qzzz5Dq9WyadOmHPvfeustTE1NOXLkSPa+PXv20LZtW+zs7LC0tCQoKIgdO3bkKvPKlSv0798fd3d3zMzMKFu2LIMGDSI9PR2AMWPGoNFocp13p0v8hQsXAPDx8eH48eMEBwdnd4tv1qwZ8ODx0wsXLqROnTpYWFjg7OxM7969uXLlSo5j+vbti7W1NVeuXKFLly5YW1vj4uLCu+++S1ZW1kM/r/zG1KxZM6pWrUpoaChBQUFYWlpSvnx5Fi1aBEBwcDANGjTAwsICf39/Nm7ceN/Ps1+/fpQqVQozMzOqVKnCb7/99tA4L1y4gEajYcuWLRw/fjw71juxJSUlMWrUKDw9PTEzM8Pf359vvvkGRVFylKPRaBg6dChz586lSpUqmJmZsXbt2odee82aNQQEBGBlZYWNjQ0dOnTg+PHjOY4JDQ2lb9++lCtXDnNzc9zc3OjXrx+xsbH3vf+H1ac70tLSeOedd3BxccHKyooXXniB69evPzTW/MaydetW6tati7m5Ob6+vvzyyy8PrM9//fVXdl10dHSkZ8+eXLp0Kccxd+rHiRMnaN68OZaWlpQpU4avv/46xzXr1asHwOuvv579s3zYEIc7MZ06dYoePXpga2uLk5MTb7/9NqmpqY8V64EDBwgMDMTS0pL//e9/971+3759+fHHHwFyDGu5cz/3+929U2fvva87v6vnzp2jffv22NjY8Morr2SXO3ToUJYuXUrVqlWzfzceVT+FEOJJJS3dQghRQsXHxxMTE5Njn0ajwcnJCYCPP/6YFStW0L9/f44ePYqNjQ3r1q3j119/5fPPP6dGjRqA2k25Xbt21KlTJztR//3333nuuefYvn079evXB9RusPXr1+fmzZu89dZbVKxYkStXrrBo0SKSk5Pz1fV6ypQpDBs2DGtraz766CMASpUq9cDjZ8+ezeuvv069evWYOHEi165dY+rUqezYsYNDhw7laPHNysqiTZs2NGjQgG+++YaNGzfy7bff4uvry6BBgwotJoAbN27w/PPP07NnT1588UWmT59Oz549mTt3LiNGjGDgwIH06tUre+z1pUuXsLGxAeDatWs0bNgwO8FwcXFhzZo19O/fn4SEBEaMGHHfa7q4uDBnzhy++OILbt26xcSJEwGoVKkSiqLQqVMntmzZQv/+/alZsybr1q3jvffe48qVK7m6om/evJkFCxYwdOhQnJ2d8fHxeeC9zpkzhz59+tCmTRu++uorkpOTmT59Ok2bNuXQoUPZ527YsIHz58/z+uuv4+bmxvHjx5kxYwbHjx9n9+7d2QlafurTsGHDcHBw4LPPPuPChQtMmTKFoUOHMn/+/If+fPIay6FDh2jbti2lS5dm7NixZGVlMW7cOFxcXHKV+cUXX/DJJ5/Qo0cP3njjDa5fv873339PYGBgrrp448YN2rZtS9euXenRoweLFi1i9OjRVKtWjXbt2lGpUiXGjRvHp59+yltvvUVAQAAAjRs3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vz/VqlVj//79ZkeREuzSd5m+58QskZGRBAUF6btOCm3kyJEsXryYlStXUqFChdz3g4ODycjIIDExMc/x+n6TwrreWLuWZs2aAei7rZhQ0W0id3d3GjVqxPLly3Pfy8nJYfny5bRo0cLEZHI7SElJISYmhpCQELOjSAkWERFBcHBwnu+55ORkNm7cqO85cYojR46QkJCg7zopMKvVysiRI/n2229ZsWIFERERefY3atQINze3PN9ve/bsIS4uTt9vUiA3G2vXcmliXH23FQ96vNxkY8eOZciQITRu3JimTZvy9ttvk5qayiOPPGJ2NClhxo0bR8+ePalYsSLHjh3jlVdewWKxMHDgQLOjSTGXkpKS5y/tBw8eJDo6moCAAMLDwxkzZgyTJk2iatWqRERE8NJLLxEaGppnxmmR/LrReAsICGDixIn07duX4OBgYmJiePbZZ6lSpQpdu3Y1MbUURyNGjGDu3LksWrQIHx+f3D5tPz8/vLy88PPzY+jQoYwdO5aAgAB8fX0ZNWoULVq00MzlUiA3G2sxMTHMnTuXu+++m8DAQLZt28bTTz9N27ZtqVevnsnpJV+sYrp3333XGh4ebnV3d7c2bdrUumHDBrMjSQnUv39/a0hIiNXd3d16xx13WPv372/dv3+/2bGkBFi5cqUVuOo1ZMgQq9Vqtebk5Fhfeukla/ny5a0eHh7WTp06Wffs2WNuaCm2bjTe0tLSrHfddZe1bNmyVjc3N2vFihWtjz32mPX48eNmx5Zi6FrjDLDOnDkz95jz589bhw8fbi1TpozV29vbet9991nj4+PNCy3F0s3GWlxcnLVt27bWgIAAq4eHh7VKlSrWZ555xpqUlGRucMk3rdMtIiIiIiIi4iDq6RYRERERERFxEBXdIiIiIiIiIg6ioltERERERETEQVR0i4iIiIiIiDiIim4RERERERERB1HRLSIiIiIiIuIgKrpFREREREREHERFt4iIiIiIiIiDqOgWERERERERcRAV3SIiIiaIiorCYrHQo0cP0zLExsZiGAbR0dHXPWbChAkYhnHDl4iIiFyfim4RERETzJgxg1GjRrFmzRqOHTtmdpzrGjduHPHx8bmvChUq8Oqrr+Z5r6AyMzMdkFRERKRoUtEtIiLiZCkpKcyfP58nn3ySHj16MGvWrKuO+e6776hatSqenp506NCBzz77DMMwSExMzD1m7dq1tGnTBi8vL8LCwhg9ejSpqam5+ytVqsRrr73Go48+io+PD+Hh4Xz00Ue5+yMiIgBo2LAhhmHQvn37q3KULl2a4ODg3JfFYsHHxyf355CQEBYuXJjnM/7+/rm/06W76fPnz6ddu3Z4enoyZ84cHn74YXr37s3//d//ERISQmBgICNGjMhTkL/33nu5/w3Kly9Pv379Cv4fW0RExGQqukVERJzsq6++okaNGlSvXp0HH3yQTz/9FKvVmrv/4MGD9OvXj969e7N161aGDRvGiy++mOccMTExdOvWjb59+7Jt2zbmz5/P2rVrGTlyZJ7j3njjDRo3bsyWLVsYPnw4Tz75JHv27AHgt99+A2DZsmXEx8ezYMECh/3Ozz33HE899RS7d++ma9euAKxcuZKYmBhWrlzJZ599xqxZs3KL9c2bNzN69GheffVV9uzZw5IlS2jbtq3D8omIiDiKim4REREnmzFjBg8++CAA3bp1IykpidWrV+fu//DDD6levTqvv/461atXZ8CAATz88MN5zjF58mQeeOABxowZQ9WqVWnZsiVTp05l9uzZXLhwIfe4u+++m+HDh1OlShXGjx9PUFAQK1euBKBs2bIABAYGEhwcTEBAgMN+5zFjxtCnTx8iIiIICQkBoEyZMkybNo0aNWpwzz330KNHD5YvXw5AXFwcpUqV4p577qFixYo0bNiQ0aNHOyyfiIiIo6joFhERcaI9e/bw22+/MXDgQABcXV3p378/M2bMyHNMkyZN8nyuadOmeX7eunUrs2bNonTp0rmvrl27kpOTw8GDB3OPq1evXu62YRgEBwdz8uRJR/xqN9S4ceOr3qtduzYWiyX355CQkNxsXbp0oWLFikRGRjJ48GDmzJlDWlqa0/KKiIjYi6vZAURERG4nM2bMICsri9DQ0Nz3rFYrHh4eTJs2DT8/v3ydJyUlhWHDhl3z7m94eHjutpubW559hmGQk5NTyPRXMwwjz6PxcO2J0kqVKnXVezfK5uPjwx9//MGqVav45ZdfePnll5kwYQKbNm3C39/fbvlFREQcTXe6RUREnCQrK4vZs2fzxhtvEB0dnfvaunUroaGhzJs3D4Dq1auzefPmPJ/dtGlTnp/vvPNOdu3aRZUqVa56ubu75yvPpeOys7ML/TuVLVs2zwzm+/bts9sdaVdXVzp37syUKVPYtm0bsbGxrFixwi7nFhERcRbd6RYREXGSxYsXc/bsWYYOHXrVHe2+ffsyY8YMnnjiCYYNG8abb77J+PHjGTp0KNHR0bkTjF1aF3v8+PE0b96ckSNH8ve//51SpUqxa9culi5dyrRp0/KVp1y5cnh5ebFkyRIqVKiAp6dnvu+0X9KxY0emTZtGixYtyM7OZvz48VfdwS6MxYsXc+DAAdq2bUuZMmX48ccfycnJoXr16rd8bhEREWfSnW4REREnmTFjBp07d75mYdu3b182b97Mtm3biIiI4JtvvmHBggXUq1eP999/P3f2cg8PD8DWq7169Wr27t1LmzZtaNiwIS+//HKex9ZvxtXVlalTp/Lhhx8SGhpKr169Cvw7vfHGG4SFhdGmTRsGDRrEuHHj8Pb2LvB5/srf358FCxbQsWNHatasyQcffMC8efOoXbv2LZ9bRETEmQzrXxuxREREpMj597//zQcffMDhw4fNjiIiIiIFoMfLRUREiqD33nuPJk2aEBgYyLp163j99devWoNbREREij4V3SIiIkXQvn37mDRpEmfOnCE8PJx//OMfPP/882bHEhERkQLS4+UiIiIiIiIiDqKJ1EREREREREQcREW3iIiIiIiIiIOo6BYRERERERFxEBXdIiIiIiIiIg6ioltERERERETEQVR0i4iIiIiIiDiIim4RERERERERB1HRLSIiIiIiIuIgKrpFREREREREHOT/ATWDm/9dfYduAAAAAElFTkSuQmCC"/>
 </div>
 </div>
 </div>
@@ -8966,11 +8228,11 @@ The winner is: None
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nbconvert</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTMLExporter</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nbformat</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">save_notebook_to_html</span><span class="p">(</span><span class="n">notebook_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Nocca_Nocca.ipynb"</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Guarda el notebook como HTML"""</span>
@@ -8980,7 +8242,7 @@ The winner is: None
     
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">"notebook_exports"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">timestamp</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S"</span><span class="p">)</span>
-    <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"notebook_exports/NoccaNocca_MCTSvsMCTSeval_75simul_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">.html"</span>
+    <span class="n">output_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"notebook_exports/NoccaNocca_MCTS_100_vs_MCTS_100_eval_rollout_4_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">.html"</span>
     
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
@@ -8996,7 +8258,7 @@ The winner is: None
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [29]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">save_notebook_to_html</span><span class="p">()</span>
@@ -9010,9 +8272,9 @@ The winner is: None
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[29]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'notebook_exports/NoccaNocca_MCTSvsMCTSeval_20250629-211335.html'</pre>
+<pre>'notebook_exports/NoccaNocca_MCTS_100_vs_MCTS_100_eval_rollout_4_20250703-145423.html'</pre>
 </div>
 </div>
 </div>
